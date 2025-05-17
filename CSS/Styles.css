@@ -1,0 +1,582 @@
+:root {
+  --primary-color: #2E7D32;
+  --text-color: #333;
+  --light-color: #ffffff;
+  --gray-color: #ccc;
+  --feature-bg: #f7f7f7;
+  --slogan-color: #666;
+  --bg-light: #fff;
+  --text-dark: #333;
+  --text-muted: #666;
+  --primary-green: #28a745;
+  --card-radius: 10px;
+  --card-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  --gap: 1rem;
+}
+
+/* RESET & GLOBAL */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding-bottom: calc(var(--gap)*2 + 60px); /* space for fixed nav */
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  height: 10vh;
+  background-color: var(--light-color);
+  border-bottom: 1px solid var(--gray-color);
+  box-shadow: 5px 5px 15px var(--gray-color);
+}
+.header img {
+  width: 80px;
+  height: 80px;
+  margin-right: 1em;
+}
+.header h1 {
+  font-size: 1.5em;
+  margin-right: auto;
+  color: var(--primary-color);
+}
+
+/* DROPDOWN */
+.dropdown { position: relative; }
+.default-lang {
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.25em;
+  color: var(--primary-color);
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; right: 0;
+  background: var(--light-color);
+  border: 1px solid var(--primary-color);
+  padding: 0.5em 0;
+  border-radius: 0.5em;
+  z-index: 10;
+}
+.dropdown-menu li { list-style: none; }
+.dropdown-menu a {
+  display: block;
+  padding: 0.5em 1em;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+.dropdown-menu a:hover {
+  background: var(--primary-color);
+  color: var(--light-color);
+}
+
+/* WELCOME CARD */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+.card {
+  background: var(--light-color);
+  padding: 2em;
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.logo { width: 180px; height: 180px; margin-bottom: 1em; }
+.card h1 { font-size: 1.4em; color: var(--text-color); margin-bottom: .5em; }
+.slogan { font-size: .9em; color: var(--slogan-color); margin-bottom: 1.5em; }
+.features {
+  background: var(--feature-bg);
+  padding: 1em;
+  border-radius: .5em;
+  margin-bottom: 1.5em;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: .7em;
+}
+.feature img {
+  width: 22px; height: 22px;
+  margin-right: .7em;
+  filter: invert(40%) sepia(95%) saturate(1200%) hue-rotate(90deg) brightness(90%) contrast(100%);
+}
+.feature span { font-size: .95em; color: var(--text-color); }
+.start-now {
+  background: var(--primary-color);
+  color: var(--light-color);
+  padding: .6em 1em;
+  border: none;
+  border-radius: .3em;
+  cursor: pointer;
+  width: 100%;
+}
+.start-now:hover { opacity: .9; }
+
+/* ABOUT SECTION */
+.about-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--gap);
+}
+.about-card {
+  background: var(--bg-light);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  width: 90%;
+  max-width: 500px;
+  padding: calc(var(--gap)*1.5);
+  line-height: 1.6;
+  color: var(--text-dark);
+  text-align: left;
+  margin: 0 auto;
+}
+.about-card h2 { margin-bottom: .5rem; font-size: 1.4rem; }
+.about-card p + p { margin-top: .75rem; color: var(--text-muted); }
+
+/* HEALTH TIPS */
+.health-tips-section {
+  padding: var(--gap) 0 calc(var(--gap)*2);
+  padding-bottom: calc(var(--gap)*2 + 60px);
+  text-align: center;
+}
+.health-tips-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--gap);
+  color: var(--text-dark);
+}
+.health-tips-container {
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.tip-card {
+  position: relative;
+  width: 280px;
+  background: var(--bg-light);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  text-align: left;
+}
+.front { padding: var(--gap); }
+.tip-icon {
+  width: 100%; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tip-icon img { width: 60px; height: 60px; }
+.tip-card h3 {
+  margin: .5rem 0 .25rem;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+.tip-card p {
+  color: var(--text-muted);
+  font-size: .9rem;
+  margin-bottom: .75rem;
+}
+.read-more {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: .9rem;
+}
+.detail {
+  display: none;
+  position: absolute; top: 0; left:0;
+  width: 100%; height:100%;
+  background: var(--bg-light);
+  padding: var(--gap);
+  box-shadow: var(--card-shadow);
+  overflow-y: auto;
+}
+.detail p { color: var(--text-dark); line-height: 1.5; }
+.close-detail {
+  position: absolute; top: .5rem; right:1rem;
+  font-size: 1.3rem; color: var(--primary-green); cursor:pointer;
+}
+
+/* YOUR HEALTH JOURNEY */
+
+/* YOUR HEALTH JOURNEY */
+/* YOUR HEALTH JOURNEY */
+.journey-section {
+  padding: var(--gap);
+  display: flex;
+  justify-content: center;
+  padding-bottom: calc(var(--gap)*2 + 60px);
+}
+
+.journey-card {
+  background: var(--bg-light);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--gap);
+  width: 100%;
+  max-width: 400px;
+}
+.journey-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.journey-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.grey-container{
+    background-color: rgb(247, 247, 247);
+    padding: 10px;
+    border-radius: 10px;
+    margin: .2rem;
+}
+
+/* Trophy icon specific styles */
+.journey-header .journey-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.journey-header .journey-icon2 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+ filter: invert(77%) sepia(51%) saturate(1865%) hue-rotate(359deg) brightness(97%) contrast(95%);
+  justify-content: center;
+}
+.journey-header .journey-icon img {
+  width: 60%;
+  margin-left: 0;
+  height: 60%;
+  filter: brightness(0) invert(1);
+}
+.hint-icon{
+      width: 30px;
+  height: 30px;
+  background: var(--primary-green);
+  border-radius: 50%;
+   filter: brightness(1) invert(0);
+   padding: 2px;
+
+}
+/* Badges grid */
+.badges-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.badge {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge .icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  transition: background 0.2s;
+}
+
+/* Keep original feature icon styles */
+.feature img {
+  filter: invert(40%) sepia(95%) saturate(1200%) hue-rotate(90deg) brightness(90%) contrast(100%);
+}
+
+/* Rest of your existing styles remain unchanged */
+.journey-section {
+  padding: var(--gap);
+  display: flex;
+  justify-content: center;
+  padding-bottom: calc(var(--gap)*2 + 60px);
+}
+
+.journey-card {
+  background: var(--bg-light);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--gap);
+  width: 100%;
+  max-width: 400px;
+}
+.grey-container .journey-body .journey-info p, h3{
+    font-size: .8rem;
+}
+.grey-container .journey-body .journey-info h3{
+    font-size: .9rem;
+}
+
+.badges-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.badge {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  transition: background 0.2s;
+}
+
+.badge.completed .icon-wrapper {
+  background: var(--primary-green);
+}
+
+.badge small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+/* Keep existing progress circle styles */
+.progress-circle {
+  width: 60px;
+  height: 60px;
+}
+
+.progress-circle svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke: var(--primary-green);
+  stroke-width: 3.8;
+  stroke-dasharray: 0 100;
+  transition: stroke-dasharray 0.6s ease;
+}
+
+.circle-text {
+  fill: var(--text-dark);
+  font-size: 0.4em;
+  text-anchor: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .badges-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .journey-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 360px) {
+  .badges-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ACHIEVEMENTS MODAL */
+.modal {
+  display: none;
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+.modal-content {
+  background: var(--bg-light);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--gap);
+  width: 90%; max-width: 360px;
+  text-align: center;
+}
+.modal-content h2 {
+  margin-top: 0;
+  color: var(--text-dark);
+}
+.all-badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4-column grid */
+  gap: 0.5rem;
+  justify-items: center;
+  margin: 1rem 0;
+}
+.badge {
+ 
+  font-family: 'Poppins', sans-serif;
+  width: 100%; /* Take full grid cell width */
+}
+
+.icon-wrapper {
+    width: 50px; 
+  height: 50px;
+  margin: 0 auto;
+   
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  transition: background .2s;
+}
+.icon-wrapper img {
+  max-width: 60%;
+  max-height: 60%;
+  filter: brightness(0) invert(1);
+}
+.badge.completed .icon-wrapper {
+  background: var(--primary-green);
+}
+.badge.small {
+  font-size: .75rem;
+  color: var(--text-muted);
+    display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+}
+.view-achievements,
+.close-modal {
+  background: var(--primary-green);
+  color: var(--bg-light);
+  border: none;
+  padding: .6em 1em;
+  border-radius: .25em;
+  cursor: pointer;
+  width: 100%;
+}
+.view-achievements:hover,
+.close-modal:hover {
+  opacity: .9;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; bottom:0; left:0;
+  width: 100%; height: 60px;
+  background: var(--light-color);
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+.bottom-nav::hover{
+color: var();
+}
+.bottom-nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  list-style: none;
+}
+.nav-link {
+  display:flex; flex-direction:column; align-items:center;
+  text-decoration:none; color: var(--text-color);
+  font-size: .8rem;
+   transition: all 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+}
+.nav-link img {
+  width:24px; height:24px; margin-bottom:.2rem;
+}
+.nav-link:hover img,
+.nav-link.active img {
+  filter: invert(40%) sepia(95%) saturate(1200%) hue-rotate(90deg) brightness(90%) contrast(100%);
+}
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+  .health-tips-container,
+  .all-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+  .tip-card { width: 80% }
+  .track-container { width: 90%; }
+}
+
+/* Progress Circle Styles */
+.progress-circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.progress-circle svg {
+  transform: rotate(0deg);
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke: var(--primary-green);
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  stroke-dasharray: 0 1000;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.circle-text {
+  font-size: 28px;
+  fill: var(--text-dark);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: bold;
+}

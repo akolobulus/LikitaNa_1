@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LikitaNa</title>
+    <link rel="stylesheet" href="./CSS/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img src="./images/log.png" alt="LikitaNa Logo" />
+      <h1>LikitaNa</h1>
+      <div class="dropdown">
+        <span class="default-lang">English</span>
+        <ul class="dropdown-menu">
+          <li><a href="#">Hausa</a></li>
+          <li><a href="#">Yoruba</a></li>
+          <li><a href="#">Igbo</a></li>
+          <li><a href="#">Pidgin</a></li>
+        </ul>
+      </div>
+    </header>
+
+    
+    <nav class="bottom-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="Index.html" class="nav-link">
+            <img src="./icons/home.png" alt="Home Icon" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <img src="./icons/chat.png" alt="Chat Icon" />
+            <span>Chat</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <img src="./icons/location.png" alt="Center Icon" />
+            <span>Center</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <img src="./icons/learning.png" alt="Learn Icon" />
+            <span>Learn</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">
+            <img src="./icons/information.png" alt="About Icon" />
+            <span>About</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+
+
+      <!-- Health Tips with in‑card “flash” details -->
+      <section class="health-tips-section">
+        <h2><img src="icons/note.png" class="hint-icon" /> Health Tips</h2>
+        <div class="health-tips-container">
+          <!-- Tip 1 -->
+          <div class="tip-card">
+            <div class="front">
+              <div class="tip-icon" style="background: #e0f7e9">
+                <img
+                  src="./icons/washing-hands.png"
+                  alt="Handwash"
+                />
+              </div>
+              <h3>Proper Handwashing Technique</h3>
+              <p>
+                Wash for at least 20 seconds with soap and water to prevent the
+                spread of germs.
+              </p>
+              <a href="#" class="read-more">Read more →</a>
+            </div>
+            <div class="detail">
+              <span class="close-detail">×</span>
+              <p>
+                Handwashing is one of the most effective ways to prevent the
+                spread of pathogens. Scrub all areasincluding between fingers,
+                backs of hands, and under nails for at least 20 seconds. Rinse
+                thoroughly with warm water and dry with a clean towel.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tip 2 -->
+          <div class="tip-card">
+            <div class="front">
+              <div class="tip-icon" style="background: #f0f9e9">
+                <img
+                  src="./icons/biontech.png"
+                  alt="Vaccination"
+                />
+              </div>
+              <h3>Importance of Vaccination</h3>
+              <p>
+                Vaccines are essential for preventing serious infectious
+                diseases and ensuring public health.
+              </p>
+              <a href="#" class="read-more">Read more →</a>
+            </div>
+            <div class="detail">
+              <span class="close-detail">×</span>
+              <p>
+                Vaccines train your immune system to recognize and fight
+                infections safely. Completing the recommended schedule protects
+                you and your community from outbreaks of measles, polio,
+                hepatitis, and more.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tip 3 (example) -->
+          <div class="tip-card">
+            <div class="front">
+              <div class="tip-icon" style="background: #e9f0f7">
+                <img
+                  src="./icons/hydration.png"
+                  alt="Hydration"
+                />
+              </div>
+              <h3>Stay Hydrated</h3>
+              <p>
+                Drink at least 8 glasses of water daily to support body
+                functions.
+              </p>
+              <a href="#" class="read-more">Read more →</a>
+            </div>
+            <div class="detail">
+              <span class="close-detail">×</span>
+              <p>
+                Adequate hydration supports digestion, circulation, temperature
+                regulation, and joint health. Aim for 2–3 liters of water per
+                day, more if active or in hot weather.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Your Health Journey -->
+    <section class="journey-section">
+      <div class="journey-card">
+        <div class="journey-header">
+          <!-- trophy icon: white on green -->
+          <div class="journey-icon">
+            <img src="./icons/trophy.png" alt="Trophy" />
+          </div>
+          <h2>Your Health Journey</h2> <img src="./icons/star.png" class="journey-icon2">
+        </div>
+<div class="grey-container">
+        <div class="journey-body">
+          <!-- Add this inside the .journey-body div -->
+          <div class="progress-circle">
+            <svg viewBox="0 0 100 100">
+              <circle class="circle-bg" cx="50" cy="50" r="40" />
+              <circle
+                class="circle"
+                cx="50"
+                cy="50"
+                r="40"
+                data-percentage="35"
+              />
+              <!-- Change percentage here -->
+              <text class="circle-text" x="50" y="55">35%</text>
+              <!-- Matching percentage -->
+            </svg>
+          </div>
+          <div class="journey-info">
+            <h3>Health Rookie</h3>
+            <p>Complete health tips to level up!</p>
+          </div>
+        </div>
+
+        <div class="badges-list">
+          <!-- completed badges -->
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/hygiene.png" alt="Hygiene" />
+            </div>
+            <small>Hygiene</small>
+          </div>
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/first-aid-kit.png" alt="First Aid" />
+            </div>
+            <small>First Aid</small>
+          </div>
+
+          <!-- incomplete badges -->
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/nutrition.png" alt="Nutrition" />
+            </div>
+            <small>Nutrition</small>
+          </div>
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/prevention.png" alt="Prevention" />
+            </div>
+            <small>Prevention</small>
+          </div>
+        </div>
+
+        <button class="view-achievements">View All Achievements</button>
+      </div>
+    </section>
+
+    <!-- Achievements Modal -->
+    <div id="achievements-modal" class="modal">
+      <div class="modal-content">
+        <h2>Your Achievements</h2>
+        <div class="all-badges">
+          <!-- Row 1 -->
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/hygiene.png" alt="Hygiene" />
+            </div>
+            <small>Hygiene</small>
+          </div>
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/first-aid-kit.png" alt="First Aid" />
+            </div>
+            <small>First Aid</small>
+          </div>
+          <div class="badge completed">
+            <div class="icon-wrapper">
+              <img src="./icons/nutrition.png" alt="Nutrition" />
+            </div>
+            <small>Nutrition</small>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/prevention.png" alt="Prevention" />
+            </div>
+            <small>Prevention</small>
+          </div>
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/dumbbell.png" alt="Exercise" />
+            </div>
+            <small>Exercise</small>
+          </div>
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/moon.png" alt="Sleep" />
+            </div>
+            <small>Sleep</small>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/mental-health.png" alt="Mental Health" />
+            </div>
+            <small>Mental</small>
+          </div>
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/medicine.png" alt="Diet" />
+            </div>
+            <small>Diet</small>
+          </div>
+          <div class="badge incomplete">
+            <div class="icon-wrapper">
+              <img src="./icons/medicine.png" alt="Hydration" />
+            </div>
+            <small>Hydration</small>
+          </div>
+        </div>
+
+        <button class="close-modal">OK</button>
+      </div>
+    </div>
+</div>
+    <script src="./Script/script.js"></script>
+  </body>
+</html>
