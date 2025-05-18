@@ -52,7 +52,7 @@ LikitaNa enables users to describe symptoms in their native language. Using AI a
 
 ## 📸 Screenshot
 
-![LikitaNa Chat Interface](./images/log.png)  
+![LikitaNa Chat Interface](./images/logo.png)  
 *Figure: LikitaNa chatbot  logo.*
 
 ## ⚙️ Installation & Setup
@@ -87,17 +87,13 @@ LikitaNa enables users to describe symptoms in their native language. Using AI a
 
 Distributed under the MIT License. See `LICENSE` for details.
 
----
-
 ## 🙏 Acknowledgments
 
 - **3MTT Nigeria** for supporting this project and the Learning Community.  
 - OpenRouter / OpenAI for powering the AI assistant.  
 
----
-
 ## 👨‍💻 Developer
 
 - **Name**: AKolo Bulus  
 - **GitHub**: [akolobulus](https://github.com/akolobulus)  
-- **LinkedIn**: [AKolo Bulus](https://www.linkedin.com/in/akolobulus/)  
+- **LinkedIn**: [AKolo Bulus](www.linkedin.com/in/akolo-bulus)  
