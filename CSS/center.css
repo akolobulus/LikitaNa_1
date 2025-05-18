@@ -2,13 +2,13 @@
     
       /* Root variables */
       :root {
-        --primary: #2fb52e;
+        --primary: #00b900;
         --bg: #f5f5f5;
         --card-bg: #ffffff;
         --text: #333333;
         --info-text: #666666;
         --open-bg: #e6f4ea;
-        --open-text: #2a7f32;
+        --open-text: #00b900;
         --shadow: rgba(0, 0, 0, 0.1);
         --radius: 8px;
         --spacing: 16px;
