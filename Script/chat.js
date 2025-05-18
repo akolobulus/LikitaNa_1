@@ -5,7 +5,7 @@ const sendBtn = document.getElementById("sendBtn");
 const micBtn = document.querySelector(".fa-microphone");
 
 // Replace with your OpenRouter API key
-const OPENROUTER_API_KEY = "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";
+const OPENROUTER_API_KEY = "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";
 
 // System prompt to guide LikitaNa
 const systemPrompt = `
