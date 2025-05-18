@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LikitaNa – Health Centers Near You</title>
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS/Styles.css" />
+    <link rel="stylesheet" href="./CSS/center.css" />
+  </head>
+  <body>
+    <header class="header">
+      <img src="./images/log.png" alt="LikitaNa Logo" />
+      <h1>LikitaNa</h1>
+      <div class="dropdown">
+        <span class="default-lang">English</span>
+        <ul class="dropdown-menu">
+          <li><a href="#">Hausa</a></li>
+          <li><a href="#">Yoruba</a></li>
+          <li><a href="#">Igbo</a></li>
+          <li><a href="#">Pidgin</a></li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <h2><i class="fa fa-location-dot"></i>Health Centers Near You</h2>
+      <div id="map">Map of Lagos</div>
+      <div id="list" style="display: flex; flex-direction: column"></div>
+    </main>
+
+    <!-- Leaflet & custom JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const lagosCoords = [6.5244, 3.3792];
+        const map = L.map("map").setView(lagosCoords, 12);
+        setTimeout(() => map.invalidateSize(), 200);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(map);
+        L.marker(lagosCoords)
+          .addTo(map)
+          .bindPopup("Lagos, Nigeria")
+          .openPopup();
+
+        const centers = [
+          {
+            name: "Lagos University Teaching Hospital",
+            address: "Idi-Araba, Lagos",
+            phone: "+2348123456789",
+            rating: 4.5,
+            open: true,
+            distance: 5.2,
+          },
+          {
+            name: "General Hospital Lagos",
+            address: "Allen Avenue, Ikeja",
+            phone: "+2348098765432",
+            rating: 4.2,
+            open: false,
+            distance: 8.1,
+          },
+          {
+            name: "St. Nicholas Hospital",
+            address: "Lagos Island",
+            phone: "+2348023456789",
+            rating: 4.7,
+            open: true,
+            distance: 3.4,
+          },
+          {
+            name: "Reddington Hospital",
+            address: "Victoria Island, Lagos",
+            phone: "+2348031234567",
+            rating: 4.6,
+            open: true,
+            distance: 6.0,
+          },
+          {
+            name: "St. Raphael’s Hospital",
+            address: "Ijesha, Lagos",
+            phone: "+2348076543210",
+            rating: 4.3,
+            open: false,
+            distance: 4.8,
+          },
+        ];
+
+        const listEl = document.getElementById("list");
+        centers.forEach((c) => {
+          const card = document.createElement("div");
+          card.className = "center-card";
+          card.innerHTML = `
+          <div class="distance">${c.distance.toFixed(1)} km</div>
+          ${c.open ? '<span class="open-now">Open now</span>' : ""}
+          <h3><i class="fa fa-star"></i><span>${c.rating.toFixed(
+            1
+          )}</span><span style="margin-left:6px;">${c.name}</span></h3>
+          <div class="info"><i class="fa fa-map-marker-alt"></i>${
+            c.address
+          }</div>
+          <div class="info"><i class="fa fa-phone"></i>${c.phone}</div>
+          <div class="actions">
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+              c.name
+            )}" target="_blank"><i class="fa fa-location-arrow"></i>Directions</a>
+            <a href="tel:${c.phone}"><i class="fa fa-phone"></i>Call</a>
+          </div>
+        `;
+          listEl.appendChild(card);
+        });
+      });
+    </script>
+   <nav class="bottom-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="Index.html" class="nav-link ">
+            <img src="./icons/home.png" alt="Home Icon" />
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="chat.html" class="nav-link">
+            <img src="./icons/chat.png" alt="Chat Icon" />
+            <span>Chat</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="center.html" class="nav-link active">
+            <img src="./icons/location.png" alt="Center Icon" />
+            <span>Center</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="learn.html" class="nav-link">
+            <img src="./icons/learning.png" alt="Learn Icon" />
+            <span>Learn</span>
+            <span class="badge">2</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">
+            <img src="./icons/information.png" alt="About Icon" />
+            <span>About</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+    <script src="./Script/script.js"></script>
+  </body>
+</html>

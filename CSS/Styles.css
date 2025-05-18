@@ -580,3 +580,20 @@ color: var();
   text-anchor: middle;
   font-weight: bold;
 }
+
+
+
+.bottom-nav .badge {
+        position: absolute;
+        top: 6px;
+        right: calc(30% - 8px);
+        background: red;
+        color: #fff;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
