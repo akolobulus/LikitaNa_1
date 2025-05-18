@@ -94,6 +94,6 @@ Distributed under the MIT License. See `LICENSE` for details.
 
 ## 👨‍💻 Developer
 
-- **Name**: AKolo Bulus  
+- **Name**: AKOLO BULUS  
 - **GitHub**: [akolobulus](https://github.com/akolobulus)  
-- **LinkedIn**: [AKolo Bulus](https://linkedin.com/in/akolo-bulus)  
+- **LinkedIn**: [Akolo Bulus](https://linkedin.com/in/akolo-bulus)  
