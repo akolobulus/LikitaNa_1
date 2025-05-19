@@ -5,7 +5,7 @@ const sendBtn = document.getElementById("sendBtn");
 const micBtn = document.querySelector(".fa-microphone");
 
 // Replace with your OpenRouter API key
-const OPENROUTER_API_KEY = "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";
+const OPENROUTER_API_KEY = "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";
 
 // System prompt to guide LikitaNa
 const systemPrompt = `
@@ -13,8 +13,7 @@ You are LikitaNa, “Your Padi for Good Health,” an AI‑powered health assist
 Your mission is to provide accessible, culturally relevant health guidance in English, Hausa, Yoruba, Igbo, and Pidgin—and always in a warm, friendly tone.
 
 Language handling:
-• Detect the user’s input language (any Nigerian language).  
-• At the start of each reply, state the language in brackets. E.g., “[English] Hello!”, “[Hausa] Sannu!”.  
+• Detect the user’s input language (any Nigerian language).   
 • If the user explicitly switches (e.g. “Explain in Hausa”), honor that.  
 • If the input isn’t valid in a supported language, fall back to the closest match.
 
