@@ -1,162 +1,300 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LikitaNa – Health Centers Near You</title>
-
-    <!-- Leaflet CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./CSS/Styles.css" />
-    <link rel="stylesheet" href="./CSS/center.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikitaNa - Health Centers</title>
+    <link rel="stylesheet" href="./CSS/Styles.css">
+    <link rel="stylesheet" href="./CSS/center.css">
+</head>
+<body>
     <header class="header">
-      <img src="./images/log.png" alt="LikitaNa Logo" />
-      <h1>LikitaNa</h1>
-      <div class="dropdown">
-        <span class="default-lang">English</span>
-        <ul class="dropdown-menu">
-          <li><a href="#">Hausa</a></li>
-          <li><a href="#">Yoruba</a></li>
-          <li><a href="#">Igbo</a></li>
-          <li><a href="#">Pidgin</a></li>
-        </ul>
-      </div>
+        <img src="./images/log.png" alt="LikitaNa Logo" />
+        <h1>LikitaNa</h1>
+        <div class="dropdown">
+            <span class="default-lang">English</span>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="setLanguage('en')">English</a></li>
+                <li><a href="#" onclick="setLanguage('ha')">Hausa</a></li>
+                <li><a href="#" onclick="setLanguage('yo')">Yoruba</a></li>
+                <li><a href="#" onclick="setLanguage('ig')">Igbo</a></li>
+                <li><a href="#" onclick="setLanguage('pcm')">Pidgin</a></li>
+            </ul>
+        </div>
     </header>
-    <main>
-      <h2><i class="fa fa-location-dot"></i>Health Centers Near You</h2>
-      <div id="map">Map of Lagos</div>
-      <div id="list" style="display: flex; flex-direction: column"></div>
+
+    <main class="centers-container">
+        <div class="search-section">
+            <h2>Find Nearby Health Centers</h2>
+            <div class="search-controls">
+                <input type="text" id="locationInput" placeholder="Enter your location or allow GPS" class="location-input">
+                <button onclick="getCurrentLocation()" class="location-btn">
+                    <img src="./icons/location.png" alt="GPS" width="20" height="20">
+                    Use GPS
+                </button>
+                <button onclick="searchCenters()" class="search-btn">Search</button>
+            </div>
+            
+            <div class="filter-section">
+                <label>Filter by type:</label>
+                <select id="centerType" class="filter-select">
+                    <option value="all">All Centers</option>
+                    <option value="hospital">Hospitals</option>
+                    <option value="clinic">Clinics</option>
+                    <option value="pharmacy">Pharmacies</option>
+                    <option value="laboratory">Laboratories</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div id="map" class="map-placeholder">
+                <p>Map will load here with nearby health centers</p>
+                <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Finding nearby health centers...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="centers-list" id="centersList">
+            <h3>Nearby Health Centers</h3>
+            <div class="centers-grid" id="centersGrid">
+                <!-- Health centers will be populated here -->
+            </div>
+        </div>
+
+        <div class="emergency-section">
+            <h3>Emergency Contacts</h3>
+            <div class="emergency-contacts">
+                <div class="emergency-item">
+                    <img src="./icons/telephone.png" alt="Emergency" width="24" height="24">
+                    <div>
+                        <strong>Emergency (Nigeria)</strong>
+                        <p>199, 112</p>
+                    </div>
+                </div>
+                <div class="emergency-item">
+                    <img src="./icons/hospital.png" alt="Ambulance" width="24" height="24">
+                    <div>
+                        <strong>Lagos Emergency</strong>
+                        <p>767, 199</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- Leaflet & custom JS -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const lagosCoords = [6.5244, 3.3792];
-        const map = L.map("map").setView(lagosCoords, 12);
-        setTimeout(() => map.invalidateSize(), 200);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
-        L.marker(lagosCoords)
-          .addTo(map)
-          .bindPopup("Lagos, Nigeria")
-          .openPopup();
+    <nav class="bottom-nav">
+        <a href="Index.html" class="nav-item">
+            <img src="./icons/home.png" alt="Home" />
+            <span>Home</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <img src="./icons/chat.png" alt="Chat" />
+            <span>Chat</span>
+        </a>
+        <a href="center.html" class="nav-item active">
+            <img src="./icons/hospital.png" alt="Centers" />
+            <span>Centers</span>
+        </a>
+        <a href="learn.html" class="nav-item">
+            <img src="./icons/learning.png" alt="Learn" />
+            <span>Learn</span>
+        </a>
+        <a href="about.html" class="nav-item">
+            <img src="./icons/information.png" alt="About" />
+            <span>About</span>
+        </a>
+    </nav>
 
-        const centers = [
-          {
-            name: "Lagos University Teaching Hospital",
-            address: "Idi-Araba, Lagos",
-            phone: "+2348123456789",
-            rating: 4.5,
-            open: true,
-            distance: 5.2,
-          },
-          {
-            name: "General Hospital Lagos",
-            address: "Allen Avenue, Ikeja",
-            phone: "+2348098765432",
-            rating: 4.2,
-            open: false,
-            distance: 8.1,
-          },
-          {
-            name: "St. Nicholas Hospital",
-            address: "Lagos Island",
-            phone: "+2348023456789",
-            rating: 4.7,
-            open: true,
-            distance: 3.4,
-          },
-          {
-            name: "Reddington Hospital",
-            address: "Victoria Island, Lagos",
-            phone: "+2348031234567",
-            rating: 4.6,
-            open: true,
-            distance: 6.0,
-          },
-          {
-            name: "St. Raphael’s Hospital",
-            address: "Ijesha, Lagos",
-            phone: "+2348076543210",
-            rating: 4.3,
-            open: false,
-            distance: 4.8,
-          },
+    <script>
+        let userLocation = null;
+        let currentLanguage = 'en';
+
+        // Sample health centers data (in production, this would come from an API)
+        const sampleCenters = [
+            {
+                name: "Lagos University Teaching Hospital",
+                type: "hospital",
+                address: "Idi-Araba, Lagos",
+                phone: "+234-1-7935444",
+                distance: "2.5 km",
+                services: ["Emergency", "Surgery", "Maternity"],
+                lat: 6.5244,
+                lng: 3.3792
+            },
+            {
+                name: "Reddington Hospital",
+                type: "hospital", 
+                address: "Victoria Island, Lagos",
+                phone: "+234-1-4621234",
+                distance: "3.2 km",
+                services: ["General Medicine", "Cardiology", "Pediatrics"],
+                lat: 6.4281,
+                lng: 3.4219
+            },
+            {
+                name: "HealthPlus Pharmacy",
+                type: "pharmacy",
+                address: "Ikeja, Lagos",
+                phone: "+234-700-4325847",
+                distance: "1.8 km",
+                services: ["Medications", "Health Screening", "Consultations"],
+                lat: 6.6018,
+                lng: 3.3515
+            },
+            {
+                name: "MedLab Diagnostics",
+                type: "laboratory",
+                address: "Surulere, Lagos", 
+                phone: "+234-1-8975432",
+                distance: "4.1 km",
+                services: ["Blood Tests", "X-Ray", "Ultrasound"],
+                lat: 6.4969,
+                lng: 3.3608
+            }
         ];
 
-        const listEl = document.getElementById("list");
-        centers.forEach((c) => {
-          const card = document.createElement("div");
-          card.className = "center-card";
-          card.innerHTML = `
-          <div class="distance">${c.distance.toFixed(1)} km</div>
-          ${c.open ? '<span class="open-now">Open now</span>' : ""}
-          <h3><i class="fa fa-star"></i><span>${c.rating.toFixed(
-            1
-          )}</span><span style="margin-left:6px;">${c.name}</span></h3>
-          <div class="info"><i class="fa fa-map-marker-alt"></i>${
-            c.address
-          }</div>
-          <div class="info"><i class="fa fa-phone"></i>${c.phone}</div>
-          <div class="actions">
-            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              c.name
-            )}" target="_blank"><i class="fa fa-location-arrow"></i>Directions</a>
-            <a href="tel:${c.phone}"><i class="fa fa-phone"></i>Call</a>
-          </div>
-        `;
-          listEl.appendChild(card);
+        function getCurrentLocation() {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'block';
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        document.getElementById('locationInput').value = 'Current Location';
+                        spinner.style.display = 'none';
+                        searchCenters();
+                    },
+                    function(error) {
+                        spinner.style.display = 'none';
+                        alert('Error getting location: ' + error.message);
+                    }
+                );
+            } else {
+                spinner.style.display = 'none';
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function searchCenters() {
+            const centerType = document.getElementById('centerType').value;
+            const spinner = document.getElementById('loadingSpinner');
+            
+            spinner.style.display = 'block';
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                let filteredCenters = sampleCenters;
+                
+                if (centerType !== 'all') {
+                    filteredCenters = sampleCenters.filter(center => center.type === centerType);
+                }
+                
+                displayCenters(filteredCenters);
+                spinner.style.display = 'none';
+            }, 1000);
+        }
+
+        function displayCenters(centers) {
+            const centersGrid = document.getElementById('centersGrid');
+            centersGrid.innerHTML = '';
+            
+            if (centers.length === 0) {
+                centersGrid.innerHTML = '<p>No health centers found in your area.</p>';
+                return;
+            }
+            
+            centers.forEach(center => {
+                const centerCard = document.createElement('div');
+                centerCard.className = 'center-card';
+                centerCard.innerHTML = `
+                    <div class="center-header">
+                        <h4>${center.name}</h4>
+                        <span class="center-type">${center.type}</span>
+                    </div>
+                    <div class="center-info">
+                        <p><img src="./icons/location.png" alt="Location" width="16" height="16"> ${center.address}</p>
+                        <p><img src="./icons/telephone.png" alt="Phone" width="16" height="16"> ${center.phone}</p>
+                        <p><strong>Distance:</strong> ${center.distance}</p>
+                    </div>
+                    <div class="center-services">
+                        <strong>Services:</strong>
+                        <div class="services-list">
+                            ${center.services.map(service => `<span class="service-tag">${service}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="center-actions">
+                        <button onclick="getDirections('${center.name}')" class="directions-btn">
+                            <img src="./icons/direction.png" alt="Directions" width="16" height="16">
+                            Directions
+                        </button>
+                        <button onclick="callCenter('${center.phone}')" class="call-btn">
+                            <img src="./icons/telephone.png" alt="Call" width="16" height="16">
+                            Call
+                        </button>
+                    </div>
+                `;
+                centersGrid.appendChild(centerCard);
+            });
+        }
+
+        function getDirections(centerName) {
+            // In a real app, this would integrate with maps API
+            alert(`Opening directions to ${centerName}...`);
+        }
+
+        function callCenter(phoneNumber) {
+            window.open(`tel:${phoneNumber}`);
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            // Update UI text based on language
+            updateUILanguage(lang);
+        }
+
+        function updateUILanguage(lang) {
+            // Language-specific updates would go here
+            const translations = {
+                'en': {
+                    title: 'Find Nearby Health Centers',
+                    placeholder: 'Enter your location or allow GPS'
+                },
+                'ha': {
+                    title: 'Nemi Cibiyoyin Lafiya da ke Kusa',
+                    placeholder: 'Shigar da wurin da kake ko bari GPS'
+                },
+                'yo': {
+                    title: 'Wa Awọn Ile-iwosan Ti o wa Nitosi',
+                    placeholder: 'Tẹ ibi ti o wa tabi gba GPS laaye'
+                },
+                'ig': {
+                    title: 'Chọta Ụlọ Ọgwụ Ndị Dị Nso',
+                    placeholder: 'Tinye ebe ị nọ ma ọ bụ kwere GPS'
+                },
+                'pcm': {
+                    title: 'Find Hospital Wey Dey Near You',
+                    placeholder: 'Put where you dey or allow GPS'
+                }
+            };
+            
+            const translation = translations[lang] || translations['en'];
+            document.querySelector('.search-section h2').textContent = translation.title;
+            document.getElementById('locationInput').placeholder = translation.placeholder;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            searchCenters(); // Load sample data
         });
-      });
     </script>
-   <nav class="bottom-nav">
-      <ul>
-        <li class="nav-item">
-          <a href="Index.html" class="nav-link ">
-            <img src="./icons/home.png" alt="Home Icon" />
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="chat.html" class="nav-link">
-            <img src="./icons/chat.png" alt="Chat Icon" />
-            <span>Chat</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="center.html" class="nav-link active">
-            <img src="./icons/location.png" alt="Center Icon" />
-            <span>Center</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="learn.html" class="nav-link">
-            <img src="./icons/learning.png" alt="Learn Icon" />
-            <span>Learn</span>
-            <span class="badge">2</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="about.html" class="nav-link">
-            <img src="./icons/information.png" alt="About Icon" />
-            <span>About</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <main>
-    <script src="./Script/script.js"></script>
-  </body>
+</body>
 </html>

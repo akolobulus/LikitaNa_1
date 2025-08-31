@@ -1,289 +1,615 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LikitaNa</title>
-    <link rel="stylesheet" href="./CSS/styles.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikitaNa - Learn & Achieve</title>
+    <link rel="stylesheet" href="./CSS/Styles.css">
+</head>
+<body>
     <header class="header">
-      <img src="./images/log.png" alt="LikitaNa Logo" />
-      <h1>LikitaNa</h1>
-      <div class="dropdown">
-        <span class="default-lang">English</span>
-        <ul class="dropdown-menu">
-          <li><a href="#">Hausa</a></li>
-          <li><a href="#">Yoruba</a></li>
-          <li><a href="#">Igbo</a></li>
-          <li><a href="#">Pidgin</a></li>
-        </ul>
-      </div>
+        <img src="./images/log.png" alt="LikitaNa Logo" />
+        <h1>LikitaNa</h1>
+        <div class="dropdown">
+            <span class="default-lang">English</span>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="setLanguage('en')">English</a></li>
+                <li><a href="#" onclick="setLanguage('ha')">Hausa</a></li>
+                <li><a href="#" onclick="setLanguage('yo')">Yoruba</a></li>
+                <li><a href="#" onclick="setLanguage('ig')">Igbo</a></li>
+                <li><a href="#" onclick="setLanguage('pcm')">Pidgin</a></li>
+            </ul>
+        </div>
     </header>
 
-    
-    <nav class="bottom-nav">
-      <ul>
-        <li class="nav-item">
-          <a href="Index.html" class="nav-link">
-            <img src="./icons/home.png" alt="Home Icon" />
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="chat.html" class="nav-link">
-            <img src="./icons/chat.png" alt="Chat Icon" />
-            <span>Chat</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="center.html" class="nav-link">
-            <img src="./icons/location.png" alt="Center Icon" />
-            <span>Center</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <img src="./icons/learning.png" alt="Learn Icon" />
-            <span>Learn</span>
-            <span class="badge">2</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="about.html" class="nav-link">
-            <img src="./icons/information.png" alt="About Icon" />
-            <span>About</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <main>
+    <main class="journey-section">
+        <div class="journey-card">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">Your Health Journey</h2>
+            
+            <!-- Progress Overview -->
+            <div class="progress-overview">
+                <div class="progress-circle">
+                    <svg>
+                        <circle class="circle-bg" cx="30" cy="30" r="25"></circle>
+                        <circle class="circle" cx="30" cy="30" r="25" id="progressCircle"></circle>
+                        <text class="circle-text" x="30" y="35" id="progressText">45%</text>
+                    </svg>
+                </div>
+                <div class="progress-info">
+                    <h3>Health Progress</h3>
+                    <p>You've completed 3 out of 8 health modules</p>
+                    <p><strong>Points:</strong> <span id="userPoints">250</span></p>
+                </div>
+            </div>
 
+            <!-- Health Topics Grid -->
+            <div class="health-topics">
+                <h3>Health Learning Modules</h3>
+                <div class="topics-grid">
+                    <div class="topic-card completed" onclick="openTopic('hygiene')">
+                        <img src="./icons/hygiene.png" alt="Hygiene" />
+                        <h4>Personal Hygiene</h4>
+                        <p>Basic hygiene practices</p>
+                        <div class="topic-status">✓ Completed</div>
+                    </div>
+                    
+                    <div class="topic-card completed" onclick="openTopic('nutrition')">
+                        <img src="./icons/nutrition.png" alt="Nutrition" />
+                        <h4>Nutrition Basics</h4>
+                        <p>Healthy eating habits</p>
+                        <div class="topic-status">✓ Completed</div>
+                    </div>
+                    
+                    <div class="topic-card completed" onclick="openTopic('firstaid')">
+                        <img src="./icons/first-aid-kit.png" alt="First Aid" />
+                        <h4>First Aid</h4>
+                        <p>Emergency response basics</p>
+                        <div class="topic-status">✓ Completed</div>
+                    </div>
+                    
+                    <div class="topic-card available" onclick="openTopic('exercise')">
+                        <img src="./icons/dumbbell.png" alt="Exercise" />
+                        <h4>Exercise & Fitness</h4>
+                        <p>Physical activity guide</p>
+                        <div class="topic-status">Available</div>
+                    </div>
+                    
+                    <div class="topic-card available" onclick="openTopic('sleep')">
+                        <img src="./icons/moon.png" alt="Sleep" />
+                        <h4>Sleep Health</h4>
+                        <p>Better sleep habits</p>
+                        <div class="topic-status">Available</div>
+                    </div>
+                    
+                    <div class="topic-card locked">
+                        <img src="./icons/mental-health.png" alt="Mental Health" />
+                        <h4>Mental Health</h4>
+                        <p>Emotional wellbeing</p>
+                        <div class="topic-status">🔒 Locked</div>
+                    </div>
+                    
+                    <div class="topic-card locked">
+                        <img src="./icons/prevention.png" alt="Prevention" />
+                        <h4>Disease Prevention</h4>
+                        <p>Preventive healthcare</p>
+                        <div class="topic-status">🔒 Locked</div>
+                    </div>
+                    
+                    <div class="topic-card locked">
+                        <img src="./icons/medicine.png" alt="Medications" />
+                        <h4>Medication Safety</h4>
+                        <p>Safe medication use</p>
+                        <div class="topic-status">🔒 Locked</div>
+                    </div>
+                </div>
+            </div>
 
-      <!-- Health Tips with in‑card “flash” details -->
-      <section class="health-tips-section">
-        <h2><img src="icons/note.png" class="hint-icon" /> Health Tips</h2>
-        <div class="health-tips-container">
-          <!-- Tip 1 -->
-          <div class="tip-card">
-            <div class="front">
-              <div class="tip-icon" style="background: #e0f7e9">
-                <img
-                  src="./icons/washing-hands.png"
-                  alt="Handwash"
-                />
-              </div>
-              <h3>Proper Handwashing Technique</h3>
-              <p>
-                Wash for at least 20 seconds with soap and water to prevent the
-                spread of germs.
-              </p>
-              <a href="#" class="read-more">Read more →</a>
+            <!-- Achievements -->
+            <div class="achievements-section">
+                <h3>Your Achievements</h3>
+                <div class="badges-list">
+                    <div class="badge completed">
+                        <div class="icon-wrapper">
+                            <img src="./icons/hygiene.png" alt="Hygiene" />
+                        </div>
+                        <small>Hygiene Master</small>
+                    </div>
+                    
+                    <div class="badge completed">
+                        <div class="icon-wrapper">
+                            <img src="./icons/first-aid-kit.png" alt="First Aid" />
+                        </div>
+                        <small>First Aid Hero</small>
+                    </div>
+                    
+                    <div class="badge completed">
+                        <div class="icon-wrapper">
+                            <img src="./icons/nutrition.png" alt="Nutrition" />
+                        </div>
+                        <small>Nutrition Expert</small>
+                    </div>
+                    
+                    <div class="badge incomplete">
+                        <div class="icon-wrapper">
+                            <img src="./icons/trophy.png" alt="Achievement" />
+                        </div>
+                        <small>Health Champion</small>
+                    </div>
+                </div>
             </div>
-            <div class="detail">
-              <span class="close-detail">×</span>
-              <p>
-                Handwashing is one of the most effective ways to prevent the
-                spread of pathogens. Scrub all areasincluding between fingers,
-                backs of hands, and under nails for at least 20 seconds. Rinse
-                thoroughly with warm water and dry with a clean towel.
-              </p>
-            </div>
-          </div>
 
-          <!-- Tip 2 -->
-          <div class="tip-card">
-            <div class="front">
-              <div class="tip-icon" style="background: #f0f9e9">
-                <img
-                  src="./icons/biontech.png"
-                  alt="Vaccination"
-                />
-              </div>
-              <h3>Importance of Vaccination</h3>
-              <p>
-                Vaccines are essential for preventing serious infectious
-                diseases and ensuring public health.
-              </p>
-              <a href="#" class="read-more">Read more →</a>
+            <!-- Daily Health Tip -->
+            <div class="daily-tip">
+                <h3>💡 Daily Health Tip</h3>
+                <div class="tip-content">
+                    <p id="dailyTipText">"Drink at least 8 glasses of water daily to keep your body well-hydrated and support proper organ function."</p>
+                    <button onclick="getNewTip()" class="tip-refresh-btn">Get New Tip</button>
+                </div>
             </div>
-            <div class="detail">
-              <span class="close-detail">×</span>
-              <p>
-                Vaccines train your immune system to recognize and fight
-                infections safely. Completing the recommended schedule protects
-                you and your community from outbreaks of measles, polio,
-                hepatitis, and more.
-              </p>
-            </div>
-          </div>
 
-          <!-- Tip 3 (example) -->
-          <div class="tip-card">
-            <div class="front">
-              <div class="tip-icon" style="background: #e9f0f7">
-                <img
-                  src="./icons/hydration.png"
-                  alt="Hydration"
-                />
-              </div>
-              <h3>Stay Hydrated</h3>
-              <p>
-                Drink at least 8 glasses of water daily to support body
-                functions.
-              </p>
-              <a href="#" class="read-more">Read more →</a>
+            <!-- Wellness Challenges (Pro Feature) -->
+            <div class="wellness-challenges">
+                <h3>🏆 Wellness Challenges</h3>
+                <div id="wellnessChallenges">
+                    <!-- Will be populated based on subscription -->
+                </div>
             </div>
-            <div class="detail">
-              <span class="close-detail">×</span>
-              <p>
-                Adequate hydration supports digestion, circulation, temperature
-                regulation, and joint health. Aim for 2–3 liters of water per
-                day, more if active or in hot weather.
-              </p>
-            </div>
-          </div>
         </div>
-      </section>
     </main>
-    <!-- Your Health Journey -->
-    <section class="journey-section">
-      <div class="journey-card">
-        <div class="journey-header">
-          <!-- trophy icon: white on green -->
-          <div class="journey-icon">
-            <img src="./icons/trophy.png" alt="Trophy" />
-          </div>
-          <h2>Your Health Journey</h2> <img src="./icons/star.png" class="journey-icon2">
+
+    <!-- Learning Modal -->
+    <div id="learningModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLearningModal()">&times;</span>
+            <div id="learningContent">
+                <!-- Content will be loaded here -->
+            </div>
         </div>
-<div class="grey-container">
-        <div class="journey-body">
-          <!-- Add this inside the .journey-body div -->
-          <div class="progress-circle">
-            <svg viewBox="0 0 100 100">
-              <circle class="circle-bg" cx="50" cy="50" r="40" />
-              <circle
-                class="circle"
-                cx="50"
-                cy="50"
-                r="40"
-                data-percentage="35"
-              />
-              <!-- Change percentage here -->
-              <text class="circle-text" x="50" y="55">35%</text>
-              <!-- Matching percentage -->
-            </svg>
-          </div>
-          <div class="journey-info">
-            <h3>Health Rookie</h3>
-            <p>Complete health tips to level up!</p>
-          </div>
-        </div>
-
-        <div class="badges-list">
-          <!-- completed badges -->
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/hygiene.png" alt="Hygiene" />
-            </div>
-            <small>Hygiene</small>
-          </div>
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/first-aid-kit.png" alt="First Aid" />
-            </div>
-            <small>First Aid</small>
-          </div>
-
-          <!-- incomplete badges -->
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/nutrition.png" alt="Nutrition" />
-            </div>
-            <small>Nutrition</small>
-          </div>
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/prevention.png" alt="Prevention" />
-            </div>
-            <small>Prevention</small>
-          </div>
-        </div>
-
-        <button class="view-achievements">View All Achievements</button>
-      </div>
-    </section>
-
-    <!-- Achievements Modal -->
-    <div id="achievements-modal" class="modal">
-      <div class="modal-content">
-        <h2>Your Achievements</h2>
-        <div class="all-badges">
-          <!-- Row 1 -->
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/hygiene.png" alt="Hygiene" />
-            </div>
-            <small>Hygiene</small>
-          </div>
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/first-aid-kit.png" alt="First Aid" />
-            </div>
-            <small>First Aid</small>
-          </div>
-          <div class="badge completed">
-            <div class="icon-wrapper">
-              <img src="./icons/nutrition.png" alt="Nutrition" />
-            </div>
-            <small>Nutrition</small>
-          </div>
-
-          <!-- Row 2 -->
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/prevention.png" alt="Prevention" />
-            </div>
-            <small>Prevention</small>
-          </div>
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/dumbbell.png" alt="Exercise" />
-            </div>
-            <small>Exercise</small>
-          </div>
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/moon.png" alt="Sleep" />
-            </div>
-            <small>Sleep</small>
-          </div>
-
-          <!-- Row 3 -->
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/mental-health.png" alt="Mental Health" />
-            </div>
-            <small>Mental</small>
-          </div>
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/medicine.png" alt="Diet" />
-            </div>
-            <small>Diet</small>
-          </div>
-          <div class="badge incomplete">
-            <div class="icon-wrapper">
-              <img src="./icons/medicine.png" alt="Hydration" />
-            </div>
-            <small>Hydration</small>
-          </div>
-        </div>
-
-        <button class="close-modal">OK</button>
-      </div>
     </div>
-</div>
-    <script src="./Script/script.js"></script>
-  </body>
+
+    <nav class="bottom-nav">
+        <a href="Index.html" class="nav-item">
+            <img src="./icons/home.png" alt="Home" />
+            <span>Home</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <img src="./icons/chat.png" alt="Chat" />
+            <span>Chat</span>
+        </a>
+        <a href="center.html" class="nav-item">
+            <img src="./icons/hospital.png" alt="Centers" />
+            <span>Centers</span>
+        </a>
+        <a href="learn.html" class="nav-item active">
+            <img src="./icons/learning.png" alt="Learn" />
+            <span>Learn</span>
+        </a>
+        <a href="about.html" class="nav-item">
+            <img src="./icons/information.png" alt="About" />
+            <span>About</span>
+        </a>
+    </nav>
+
+    <script>
+        let currentLanguage = 'en';
+        let userStats = JSON.parse(localStorage.getItem('userStats')) || {
+            completedTopics: ['hygiene', 'nutrition', 'firstaid'],
+            points: 250,
+            badges: ['hygiene', 'first-aid', 'nutrition']
+        };
+
+        // Health tips database
+        const healthTips = [
+            "Drink at least 8 glasses of water daily to keep your body well-hydrated.",
+            "Wash your hands frequently with soap and water for at least 20 seconds.",
+            "Get 7-9 hours of quality sleep each night for optimal health.",
+            "Exercise for at least 30 minutes, 3-5 times a week.",
+            "Eat a balanced diet with plenty of fruits and vegetables.",
+            "Take deep breaths and practice relaxation techniques to manage stress.",
+            "Limit processed foods and sugary drinks in your diet.",
+            "Regular health checkups can help detect problems early.",
+            "Maintain good posture to prevent back and neck problems.",
+            "Stay socially connected with family and friends for mental health."
+        ];
+
+        // Learning content database
+        const learningContent = {
+            hygiene: {
+                title: "Personal Hygiene",
+                content: `
+                    <h3>Personal Hygiene Basics</h3>
+                    <p>Good personal hygiene is essential for maintaining health and preventing illness.</p>
+                    
+                    <h4>Key Practices:</h4>
+                    <ul>
+                        <li><strong>Hand Washing:</strong> Wash hands with soap for 20 seconds</li>
+                        <li><strong>Oral Care:</strong> Brush teeth twice daily and floss regularly</li>
+                        <li><strong>Body Cleanliness:</strong> Regular bathing and clean clothes</li>
+                        <li><strong>Hair Care:</strong> Keep hair clean and well-groomed</li>
+                    </ul>
+                    
+                    <h4>Why It Matters:</h4>
+                    <p>Good hygiene prevents infections, boosts confidence, and promotes social acceptance.</p>
+                    
+                    <div class="quiz-section">
+                        <h4>Quick Quiz:</h4>
+                        <p><strong>How long should you wash your hands?</strong></p>
+                        <button onclick="answerQuiz('correct')">20 seconds</button>
+                        <button onclick="answerQuiz('wrong')">5 seconds</button>
+                        <button onclick="answerQuiz('wrong')">1 minute</button>
+                    </div>
+                `
+            },
+            exercise: {
+                title: "Exercise & Fitness",
+                content: `
+                    <h3>Exercise & Fitness Guide</h3>
+                    <p>Regular physical activity is crucial for maintaining good health.</p>
+                    
+                    <h4>Benefits of Exercise:</h4>
+                    <ul>
+                        <li>Strengthens heart and improves circulation</li>
+                        <li>Helps maintain healthy weight</li>
+                        <li>Reduces risk of chronic diseases</li>
+                        <li>Improves mental health and mood</li>
+                        <li>Increases energy levels</li>
+                    </ul>
+                    
+                    <h4>Getting Started:</h4>
+                    <ul>
+                        <li>Start with 10-15 minutes of activity daily</li>
+                        <li>Choose activities you enjoy</li>
+                        <li>Gradually increase duration and intensity</li>
+                        <li>Include both cardio and strength exercises</li>
+                    </ul>
+                    
+                    <h4>Simple Exercises:</h4>
+                    <ul>
+                        <li>Walking or jogging</li>
+                        <li>Push-ups and sit-ups</li>
+                        <li>Jumping jacks</li>
+                        <li>Stretching</li>
+                    </ul>
+                    
+                    <button onclick="completeLesson('exercise')" class="complete-btn">Mark as Complete</button>
+                `
+            },
+            sleep: {
+                title: "Sleep Health",
+                content: `
+                    <h3>Better Sleep for Better Health</h3>
+                    <p>Quality sleep is essential for physical and mental health.</p>
+                    
+                    <h4>Why Sleep Matters:</h4>
+                    <ul>
+                        <li>Helps body repair and regenerate</li>
+                        <li>Strengthens immune system</li>
+                        <li>Improves memory and concentration</li>
+                        <li>Regulates hormones</li>
+                        <li>Supports emotional well-being</li>
+                    </ul>
+                    
+                    <h4>Sleep Tips:</h4>
+                    <ul>
+                        <li>Go to bed and wake up at the same time daily</li>
+                        <li>Create a relaxing bedtime routine</li>
+                        <li>Keep bedroom cool, dark, and quiet</li>
+                        <li>Avoid caffeine and screens before bedtime</li>
+                        <li>Get 7-9 hours of sleep nightly</li>
+                    </ul>
+                    
+                    <button onclick="completeLesson('sleep')" class="complete-btn">Mark as Complete</button>
+                `
+            }
+        };
+
+        function openTopic(topicId) {
+            const content = learningContent[topicId];
+            if (!content) {
+                alert('This content is not available yet. Check back soon!');
+                return;
+            }
+            
+            if (!userStats.completedTopics.includes(topicId) && !isTopicAvailable(topicId)) {
+                alert('Complete previous topics to unlock this content.');
+                return;
+            }
+            
+            document.getElementById('learningContent').innerHTML = content.content;
+            document.getElementById('learningModal').style.display = 'block';
+        }
+
+        function isTopicAvailable(topicId) {
+            const availableTopics = ['hygiene', 'nutrition', 'firstaid', 'exercise', 'sleep'];
+            return availableTopics.includes(topicId);
+        }
+
+        function closeLearningModal() {
+            document.getElementById('learningModal').style.display = 'none';
+        }
+
+        function completeLesson(topicId) {
+            if (!userStats.completedTopics.includes(topicId)) {
+                userStats.completedTopics.push(topicId);
+                userStats.points += 50;
+                
+                // Award badge
+                if (!userStats.badges.includes(topicId)) {
+                    userStats.badges.push(topicId);
+                    alert(`🎉 Congratulations! You earned the ${topicId} badge and 50 points!`);
+                }
+                
+                localStorage.setItem('userStats', JSON.stringify(userStats));
+                updateProgressDisplay();
+                closeLearningModal();
+                location.reload(); // Refresh to update UI
+            }
+        }
+
+        function answerQuiz(result) {
+            if (result === 'correct') {
+                alert('✅ Correct! Good hygiene knowledge!');
+                userStats.points += 10;
+                localStorage.setItem('userStats', JSON.stringify(userStats));
+                updateProgressDisplay();
+            } else {
+                alert('❌ Not quite right. The correct answer is 20 seconds.');
+            }
+        }
+
+        function getNewTip() {
+            const randomTip = healthTips[Math.floor(Math.random() * healthTips.length)];
+            document.getElementById('dailyTipText').textContent = `"${randomTip}"`;
+            
+            // Award points for engagement
+            userStats.points += 5;
+            localStorage.setItem('userStats', JSON.stringify(userStats));
+            updateProgressDisplay();
+        }
+
+        function updateProgressDisplay() {
+            const totalTopics = 8;
+            const completedCount = userStats.completedTopics.length;
+            const progressPercent = Math.round((completedCount / totalTopics) * 100);
+            
+            document.getElementById('progressText').textContent = `${progressPercent}%`;
+            document.getElementById('userPoints').textContent = userStats.points;
+            
+            // Update progress circle
+            const circle = document.getElementById('progressCircle');
+            const circumference = 2 * Math.PI * 25;
+            const strokeDasharray = (progressPercent / 100) * circumference;
+            circle.style.strokeDasharray = `${strokeDasharray} ${circumference}`;
+        }
+
+        function loadWellnessChallenges() {
+            const userSubscription = localStorage.getItem('userSubscription') || 'free';
+            const challengesContainer = document.getElementById('wellnessChallenges');
+            
+            if (userSubscription === 'pro') {
+                challengesContainer.innerHTML = `
+                    <div class="challenge-item">
+                        <h4>💧 7-Day Hydration Challenge</h4>
+                        <p>Drink 8 glasses of water daily for a week</p>
+                        <div class="challenge-progress">Progress: 3/7 days</div>
+                        <button onclick="joinChallenge('hydration')" class="challenge-btn">Continue</button>
+                    </div>
+                    <div class="challenge-item">
+                        <h4>🚶‍♀️ 10,000 Steps Challenge</h4>
+                        <p>Walk 10,000 steps daily for 30 days</p>
+                        <div class="challenge-progress">Progress: 0/30 days</div>
+                        <button onclick="joinChallenge('steps')" class="challenge-btn">Start</button>
+                    </div>
+                `;
+            } else {
+                challengesContainer.innerHTML = `
+                    <div class="pro-feature-notice">
+                        <p>🔒 Wellness challenges are available for Pro subscribers</p>
+                        <button onclick="window.location.href='Index.html#upgrade'" class="upgrade-btn">Upgrade to Pro</button>
+                    </div>
+                `;
+            }
+        }
+
+        function joinChallenge(challengeType) {
+            alert(`🎯 Challenge accepted! Track your progress daily and earn bonus points.`);
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            // Update UI language
+            updateUILanguage(lang);
+        }
+
+        function updateUILanguage(lang) {
+            // Language-specific updates would go here
+            const langName = {
+                'en': 'English', 'ha': 'Hausa', 'yo': 'Yoruba', 
+                'ig': 'Igbo', 'pcm': 'Pidgin'
+            }[lang] || 'English';
+            
+            document.querySelector('.default-lang').textContent = langName;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressDisplay();
+            loadWellnessChallenges();
+            
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('learningModal');
+                if (event.target === modal) {
+                    closeLearningModal();
+                }
+            };
+        });
+    </script>
+
+    <style>
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .topic-card.completed {
+            border-color: var(--primary-green);
+            background: #f8fff8;
+        }
+
+        .topic-card.available {
+            border-color: var(--primary-color);
+        }
+
+        .topic-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #f5f5f5;
+        }
+
+        .topic-card img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-card h4 {
+            margin: 0.5rem 0;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .topic-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-status {
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .completed .topic-status {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .available .topic-status {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .locked .topic-status {
+            background: #999;
+            color: white;
+        }
+
+        .daily-tip {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .daily-tip h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tip-refresh-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .wellness-challenges {
+            margin-top: 1.5rem;
+        }
+
+        .challenge-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-progress {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .challenge-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .pro-feature-notice {
+            text-align: center;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 0.5rem;
+            border: 2px dashed #ddd;
+        }
+
+        .complete-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .quiz-section {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .quiz-section button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+    </style>
+</body>
 </html>

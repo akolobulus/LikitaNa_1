@@ -1,108 +1,252 @@
 
-const chatEl = document.getElementById("chat");
-const inputEl = document.getElementById("messageInput");
-const sendBtn = document.getElementById("sendBtn");
-const micBtn = document.querySelector(".fa-microphone");
+// Chat functionality with Gemini AI integration
+let currentLanguage = 'en';
+let isRecording = false;
+let recognition = null;
 
-// Replace with your OpenRouter API key
-const OPENROUTER_API_KEY = "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";
+// Language mappings
+const languages = {
+    'en': 'English',
+    'ha': 'Hausa', 
+    'yo': 'Yoruba',
+    'ig': 'Igbo',
+    'pcm': 'Pidgin'
+};
 
-// System prompt to guide LikitaNa
-const systemPrompt = `
-You are LikitaNa, “Your Padi for Good Health,” an AI‑powered health assistant for rural and underserved Nigerians.  
-Your mission is to provide accessible, culturally relevant health guidance in English, Hausa, Yoruba, Igbo, and Pidgin—and always in a warm, friendly tone.
+// Gemini API configuration
+const GEMINI_API_KEY = 'AIzaSyDGpSoq8nL9xQGhJyWJGgJvLo8mVxKtPaA'; // Replace with your actual API key
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
-Language handling:
-• Detect the user’s input language (any Nigerian language).   
-• If the user explicitly switches (e.g. “Explain in Hausa”), honor that.  
-• If the input isn’t valid in a supported language, fall back to the closest match.
-
-Conversation style:
-• Recognize greetings (“Hi”, “Good morning”), jokes, and small talk; respond in kind before health advice.  
-• Keep responses friendly and engaging.
-
-Symptom guidance:
-• When users describe symptoms, interpret and suggest basic advice or preventive measures.  
-• If they mention danger words (e.g., bleeding, chest pain, severe headache, unconsciousness), immediately warn:  
-  “[<Language>] This sounds serious—please seek medical attention right away or check the Centers page for nearby facilities.”
-
-Features:
-• Offer geolocation‑based directions by saying, e.g., “Check the Center page for nearby facilities.”  
-• Share concise health tips and awareness content.  
-• Encourage responsible healthcare‑seeking.  
-• Acknowledge gamification: “[<Language>] Great job on your Hygiene badge—keep going!”  
-• Support voice and text input; keep language simple, empathetic, respectful.  
-• Always conclude with:  
-  “[<Language>] Remember, I’m not a doctor—if in doubt, please see a healthcare professional or visit a nearby health center.”
-
-Health no go pass you by!
-`.trim();
-
-function addBubble(text, sender) {
-    const div = document.createElement("div");
-    div.className = `bubble ${sender}`;
-    div.textContent = text;
-    chatEl.appendChild(div);
-    // auto-scroll
-    chatEl.scrollTop = chatEl.scrollHeight;
-}
-
-async function openRouterChat(userMessage) {
-    addBubble("Typing...", "bot");
-    try {
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${OPENROUTER_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "openai/gpt-3.5-turbo",
-                messages: [
-                    { role: "system", content: systemPrompt },
-                    { role: "user", content: userMessage }
-                ],
-                temperature: 0.7,
-                max_tokens: 500
-            })
-        });
-        const data = await response.json();
-        // remove "Typing..." bubble
-        const last = chatEl.querySelector(".bubble.bot:last-child");
-        if (last && last.textContent === "Typing...") last.remove();
-
-        const botReply = data.choices[0].message.content.trim();
-        addBubble(botReply, "bot");
-    } catch (err) {
-        console.error(err);
-        const last = chatEl.querySelector(".bubble.bot:last-child");
-        if (last && last.textContent === "Typing...") last.remove();
-        addBubble("Sorry, I couldn't respond. Please try again later.", "bot");
+// Initialize speech recognition
+function initializeSpeechRecognition() {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = getLanguageCode(currentLanguage);
+        
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById('chatInput').value = transcript;
+            sendMessage();
+        };
+        
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            stopRecording();
+        };
+        
+        recognition.onend = function() {
+            stopRecording();
+        };
     }
 }
 
-sendBtn.addEventListener("click", () => {
-    const msg = inputEl.value.trim();
-    if (!msg) return;
-    addBubble(msg, "user");
-    inputEl.value = "";
-    openRouterChat(msg);
-});
-
-inputEl.addEventListener("keypress", e => {
-    if (e.key === "Enter") sendBtn.click();
-});
-
-// Voice input
-if (window.webkitSpeechRecognition) {
-    const recognition = new webkitSpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    micBtn.addEventListener("click", () => recognition.start());
-    recognition.onresult = e => {
-        inputEl.value = e.results[0][0].transcript;
-        sendBtn.click();
+function getLanguageCode(lang) {
+    const langCodes = {
+        'en': 'en-US',
+        'ha': 'ha-NG',
+        'yo': 'yo-NG', 
+        'ig': 'ig-NG',
+        'pcm': 'en-NG'
     };
-} else {
-    micBtn.style.display = "none";
+    return langCodes[lang] || 'en-US';
 }
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    document.getElementById('currentLang').textContent = languages[lang];
+    
+    if (recognition) {
+        recognition.lang = getLanguageCode(lang);
+    }
+    
+    // Update UI text based on language
+    updateUILanguage(lang);
+}
+
+function updateUILanguage(lang) {
+    const translations = {
+        'en': {
+            placeholder: 'Type your message or describe your symptoms...',
+            greeting: 'Hello! I\'m your health assistant. How can I help you today?'
+        },
+        'ha': {
+            placeholder: 'Rubuta sakonka ko bayyana alamun rashin lafiya...',
+            greeting: 'Sannu! Ni mai taimakon lafiya. Yaya zan iya taimaka maka yau?'
+        },
+        'yo': {
+            placeholder: 'Ko ifiranṣe rẹ tabi ṣe apejuwe awọn ami aisan...',
+            greeting: 'Bawo! Emi ni oluranlowo ilera. Bawo ni mo ṣe le ran ọ lọwọ loni?'
+        },
+        'ig': {
+            placeholder: 'Dee ozi gị ma ọ bụ kọwaa mgbaàmà ọrịa...',
+            greeting: 'Ndewo! Abụ m onye inyeaka ahụike. Kedu ka m ga-esi nyere gị aka taa?'
+        },
+        'pcm': {
+            placeholder: 'Type your message or talk wetin dey worry you...',
+            greeting: 'How far! I be your health helper. How I fit help you today?'
+        }
+    };
+    
+    const translation = translations[lang] || translations['en'];
+    document.getElementById('chatInput').placeholder = translation.placeholder;
+}
+
+function toggleVoiceInput() {
+    if (!recognition) {
+        initializeSpeechRecognition();
+    }
+    
+    if (isRecording) {
+        stopRecording();
+    } else {
+        startRecording();
+    }
+}
+
+function startRecording() {
+    if (recognition) {
+        isRecording = true;
+        document.getElementById('voiceBtn').classList.add('recording');
+        recognition.start();
+    }
+}
+
+function stopRecording() {
+    isRecording = false;
+    document.getElementById('voiceBtn').classList.remove('recording');
+    if (recognition) {
+        recognition.stop();
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function sendQuickMessage(message) {
+    document.getElementById('chatInput').value = message;
+    sendMessage();
+}
+
+function addMessage(message, isUser = false) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+    
+    const sender = isUser ? 'You' : 'LikitaNa';
+    messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    document.getElementById('typingIndicator').style.display = 'block';
+}
+
+function hideTypingIndicator() {
+    document.getElementById('typingIndicator').style.display = 'none';
+}
+
+async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addMessage(message, true);
+    input.value = '';
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        // Call Gemini AI
+        const response = await callGeminiAPI(message);
+        hideTypingIndicator();
+        addMessage(response);
+        
+        // Update user progress for gamification
+        updateUserProgress(message);
+        
+    } catch (error) {
+        hideTypingIndicator();
+        console.error('Error calling AI:', error);
+        addMessage('Sorry, I\'m having trouble connecting right now. Please try again later.');
+    }
+}
+
+async function callGeminiAPI(userMessage) {
+    const systemPrompt = `You are LikitaNa, a helpful health assistant for Nigerian communities. Respond in ${languages[currentLanguage]} language. 
+
+Key guidelines:
+- Provide basic health advice and symptom guidance
+- Always recommend seeing a healthcare professional for serious concerns
+- Be culturally sensitive to Nigerian context
+- Keep responses concise and easy to understand
+- For location requests, mention checking the Centers page
+- Include relevant health tips when appropriate
+- End with: "Remember, I'm not a doctor—if in doubt, please see a healthcare professional."
+
+User message: ${userMessage}`;
+
+    const requestBody = {
+        contents: [{
+            parts: [{
+                text: systemPrompt
+            }]
+        }]
+    };
+
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    });
+
+    if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.candidates[0].content.parts[0].text;
+}
+
+function updateUserProgress(message) {
+    // Simple gamification - award points for engagement
+    let userStats = JSON.parse(localStorage.getItem('userStats')) || {
+        messagesCount: 0,
+        badges: [],
+        points: 0
+    };
+    
+    userStats.messagesCount++;
+    userStats.points += 10;
+    
+    // Award badges based on activity
+    if (userStats.messagesCount >= 5 && !userStats.badges.includes('communicator')) {
+        userStats.badges.push('communicator');
+        addMessage('🎉 Congratulations! You earned the Communicator badge!');
+    }
+    
+    if (userStats.messagesCount >= 20 && !userStats.badges.includes('health-seeker')) {
+        userStats.badges.push('health-seeker');
+        addMessage('🎉 Amazing! You earned the Health Seeker badge!');
+    }
+    
+    localStorage.setItem('userStats', JSON.stringify(userStats));
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSpeechRecognition();
+    setLanguage('en');
+});

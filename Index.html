@@ -1,105 +1,152 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LikitaNa</title>
-    <link rel="stylesheet" href="./CSS/styles.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikitaNa - Your Health Assistant</title>
+    <link rel="stylesheet" href="./CSS/Styles.css">
+</head>
+<body>
     <header class="header">
-      <img src="./images/log.png" alt="LikitaNa Logo" />
-      <h1>LikitaNa</h1>
-      <div class="dropdown">
-        <span class="default-lang">English</span>
-        <ul class="dropdown-menu">
-          <li><a href="#">Hausa</a></li>
-          <li><a href="#">Yoruba</a></li>
-          <li><a href="#">Igbo</a></li>
-          <li><a href="#">Pidgin</a></li>
-        </ul>
-      </div>
+        <img src="./images/log.png" alt="LikitaNa Logo" />
+        <h1>LikitaNa</h1>
+        <div class="dropdown">
+            <span class="default-lang" id="currentLang">English</span>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="setLanguage('en')">English</a></li>
+                <li><a href="#" onclick="setLanguage('ha')">Hausa</a></li>
+                <li><a href="#" onclick="setLanguage('yo')">Yoruba</a></li>
+                <li><a href="#" onclick="setLanguage('ig')">Igbo</a></li>
+                <li><a href="#" onclick="setLanguage('pcm')">Pidgin</a></li>
+            </ul>
+        </div>
     </header>
 
     <div class="card-container">
-      <div class="card">
-        <img src="./images/log.png" alt="LikitaNa Logo" class="logo" />
-        <h1>Welcome to LikitaNa</h1>
-        <p class="slogan">Your Health Padi</p>
-        <div class="features">
-          <div class="feature">
-            <img src="./icons/achievement.png" alt="Task Icon" />
-            <span>Access health guidance</span>
-          </div>
-          <div class="feature">
-            <img src="./icons/achievement.png" alt="Task Icon" />
-            <span>Symptom checking</span>
-          </div>
-          <div class="feature">
-            <img src="./icons/achievement.png" alt="Task Icon" />
-            <span>Educational tips</span>
-          </div>
-          <div class="feature">
-            <img src="./icons/achievement.png" alt="Task Icon" />
-            <span>Nearby health facilities</span>
-          </div>
+        <div class="card">
+            <img src="./images/logo.png" alt="LikitaNa Logo" class="logo" />
+            <h1 id="appTitle">LikitaNa</h1>
+            <p class="slogan" id="appSlogan">"Your Padi for Good Health"</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <img src="./icons/chat.png" alt="Chat Icon" />
+                    <span id="feature1">AI Health Assistant</span>
+                </div>
+                <div class="feature">
+                    <img src="./icons/translation.png" alt="Language Icon" />
+                    <span id="feature2">5 Nigerian Languages</span>
+                </div>
+                <div class="feature">
+                    <img src="./icons/hospital.png" alt="Hospital Icon" />
+                    <span id="feature3">Find Health Centers</span>
+                </div>
+                <div class="feature">
+                    <img src="./icons/learning.png" alt="Learn Icon" />
+                    <span id="feature4">Health Education</span>
+                </div>
+            </div>
+            
+            <button class="start-now" onclick="startChat()" id="startBtn">Start Chat</button>
+            
+            <div class="subscription-info">
+                <div class="plan-toggle">
+                    <button class="plan-btn active" onclick="showPlan('free')">Free</button>
+                    <button class="plan-btn" onclick="showPlan('pro')">Pro (₦900/month)</button>
+                </div>
+                
+                <div id="freePlan" class="plan-details active">
+                    <h3>Free Features</h3>
+                    <ul>
+                        <li>Basic symptom checker</li>
+                        <li>Health tips</li>
+                        <li>Center finder</li>
+                        <li>Text chat support</li>
+                    </ul>
+                </div>
+                
+                <div id="proPlan" class="plan-details">
+                    <h3>Pro Features</h3>
+                    <ul>
+                        <li>Live doctor consultations</li>
+                        <li>24/7 hybrid AI + human support</li>
+                        <li>Personal health records</li>
+                        <li>Medicine reminders</li>
+                        <li>Priority support</li>
+                        <li>Wellness challenges</li>
+                    </ul>
+                    <button class="upgrade-btn" onclick="openSubscriptionModal()">Upgrade to Pro</button>
+                </div>
+            </div>
         </div>
-       <a href="chat.html"> <button class="start-now">Start Now</button></a>
-      </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSubscriptionModal()">&times;</span>
+            <h2>Upgrade to LikitaNa Pro</h2>
+            <div class="subscription-details">
+                <div class="price-display">
+                    <span class="currency">₦</span>
+                    <span class="amount">900</span>
+                    <span class="period">/month</span>
+                </div>
+                
+                <div class="pro-features-list">
+                    <div class="feature-item">
+                        <img src="./icons/healthcare.png" alt="Doctor" width="20" height="20">
+                        <span>Live consultations with licensed doctors</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/note.png" alt="Records" width="20" height="20">
+                        <span>Personal health records & history</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/medicine.png" alt="Reminders" width="20" height="20">
+                        <span>Smart medicine & vaccine reminders</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/trophy.png" alt="Challenges" width="20" height="20">
+                        <span>Exclusive wellness challenges</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/star.png" alt="Priority" width="20" height="20">
+                        <span>24/7 priority support</span>
+                    </div>
+                </div>
+                
+                <button class="pay-btn" onclick="initiatePayment()">Subscribe Now</button>
+                <p class="payment-info">Secure payment via Flutterwave</p>
+            </div>
+        </div>
     </div>
 
     <nav class="bottom-nav">
-      <ul>
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <img src="./icons/home.png" alt="Home Icon" />
+        <a href="Index.html" class="nav-item active">
+            <img src="./icons/home.png" alt="Home" />
             <span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="chat.html" class="nav-link">
-            <img src="./icons/chat.png" alt="Chat Icon" />
+        </a>
+        <a href="chat.html" class="nav-item">
+            <img src="./icons/chat.png" alt="Chat" />
             <span>Chat</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="center.html" class="nav-link">
-            <img src="./icons/location.png" alt="Center Icon" />
-            <span>Center</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="learn.html" class="nav-link">
-            <img src="./icons/learning.png" alt="Learn Icon" />
+        </a>
+        <a href="center.html" class="nav-item">
+            <img src="./icons/hospital.png" alt="Centers" />
+            <span>Centers</span>
+        </a>
+        <a href="learn.html" class="nav-item">
+            <img src="./icons/learning.png" alt="Learn" />
             <span>Learn</span>
-            <span class="badge">2</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="about.html" class="nav-link">
-            <img src="./icons/information.png" alt="About Icon" />
+        </a>
+        <a href="about.html" class="nav-item">
+            <img src="./icons/information.png" alt="About" />
             <span>About</span>
-          </a>
-        </li>
-      </ul>
+        </a>
     </nav>
-    <main>
-      <!-- About LikitaNa (unchanged) -->
-      <section class="about-section">
-        <div class="about-card">
-          <h2>About LikitaNa</h2>
-          <p>
-            LikitaNa is a multilingual health assistant designed for Nigerians.
-            We provide accessible healthcare guidance in English, Hausa, Yoruba,
-            Igbo, and Pidgin.
-          </p>
-          <p>
-            Our mission is to empower everyone with reliable health information,
-            regardless of language barriers or location.
-          </p>
-        </div>
-      </section>
-    </main>
+
     <script src="./Script/script.js"></script>
-  </body>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+</body>
 </html>
