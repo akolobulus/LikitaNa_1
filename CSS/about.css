@@ -89,13 +89,15 @@
     color: var(--primary-green);
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
+    text-align: center;
 }
 
 .developer-card {
     background: var(--feature-bg);
     border-radius: var(--card-radius);
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 1rem 0;
+    box-shadow: var(--card-shadow);
 }
 
 .developer-profile {
