@@ -150,12 +150,132 @@ function closeProPrompt() {
 }
 
 function upgradeToPro() {
-    // Simulate upgrade process
+    // Open payment modal for upgrade
+    showPaymentModal();
+}
+
+function showPaymentModal() {
+    const modal = document.createElement('div');
+    modal.className = 'payment-modal';
+    modal.innerHTML = `
+        <div class="payment-modal-content">
+            <span class="close-payment" onclick="closePaymentModal()">&times;</span>
+            <h2>Upgrade to LikitaNa Pro</h2>
+            <div class="subscription-details">
+                <div class="price-display">
+                    <span class="currency">₦</span>
+                    <span class="amount">900</span>
+                    <span class="period">/month</span>
+                </div>
+                
+                <div class="pro-features-list">
+                    <div class="feature-item">
+                        <img src="./icons/healthcare.png" alt="Doctor" width="20" height="20">
+                        <span>Live consultations with licensed doctors</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/note.png" alt="Records" width="20" height="20">
+                        <span>Personal health records & history</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/medicine.png" alt="Reminders" width="20" height="20">
+                        <span>Smart medicine & vaccine reminders</span>
+                    </div>
+                    <div class="feature-item">
+                        <img src="./icons/trophy.png" alt="Wellness" width="20" height="20">
+                        <span>Exclusive wellness challenges</span>
+                    </div>
+                </div>
+                
+                <div class="payment-form">
+                    <div class="form-group">
+                        <label for="upgradeUserName">Full Name *</label>
+                        <input type="text" id="upgradeUserName" value="${currentUser.name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="upgradeUserEmail">Email Address *</label>
+                        <input type="email" id="upgradeUserEmail" value="${currentUser.email}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="upgradeUserPhone">Phone Number *</label>
+                        <input type="tel" id="upgradeUserPhone" placeholder="+234 xxx xxx xxxx" required>
+                    </div>
+                </div>
+                <button class="pay-btn" onclick="initiateUpgradePayment()">Subscribe Now</button>
+                <p class="payment-info">Secure payment via Flutterwave</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+function closePaymentModal() {
+    const modal = document.querySelector('.payment-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function initiateUpgradePayment() {
+    const amount = 900;
+    const currency = 'NGN';
+    const txRef = 'LIKITANA_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    // Get user details from form
+    const customerEmail = document.getElementById('upgradeUserEmail').value;
+    const customerName = document.getElementById('upgradeUserName').value;
+    const customerPhone = document.getElementById('upgradeUserPhone').value;
+    
+    // Validate form data
+    if (!customerEmail || !customerName || !customerPhone) {
+        alert('Please fill in all required fields');
+        return;
+    }
+    
+    if (!customerEmail.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    FlutterwaveCheckout({
+        public_key: 'FLWPUBK_TEST-68f8b6b6c0ada267982888334ff3725d-X',
+        tx_ref: txRef,
+        amount: amount,
+        currency: currency,
+        payment_options: "card, banktransfer, ussd, mobilemoney",
+        customer: {
+            email: customerEmail,
+            phone_number: customerPhone,
+            name: customerName,
+        },
+        customizations: {
+            title: "LikitaNa Pro Subscription",
+            description: "Monthly subscription to LikitaNa Pro features",
+            logo: "./images/logo.png",
+        },
+        callback: function (data) {
+            console.log('Payment successful:', data);
+            handleUpgradePaymentSuccess(data);
+        },
+        onclose: function() {
+            console.log('Payment modal closed');
+        }
+    });
+}
+
+function handleUpgradePaymentSuccess(paymentData) {
+    // Update user subscription
     currentUser.subscription = 'pro';
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('userSubscription', 'pro');
+    localStorage.setItem('subscriptionDate', new Date().toISOString());
+    localStorage.setItem('paymentReference', paymentData.tx_ref);
     
-    alert('🎉 Congratulations! You are now a Pro user. Redirecting to Pro dashboard...');
+    // Close payment modal
+    closePaymentModal();
+    
+    alert('🎉 Welcome to LikitaNa Pro! Your subscription is now active. Redirecting to Pro dashboard...');
     
     setTimeout(() => {
         window.location.href = 'dashboard-pro.html';
@@ -289,6 +409,143 @@ dashboardStyles.textContent = `
         margin-top: 0.5rem;
     }
     
+    .payment-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    .payment-modal-content {
+        background: white;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 1rem;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    @keyframes modalSlideIn {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .close-payment {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+    
+    .close-payment:hover {
+        color: #000;
+    }
+    
+    .payment-modal .price-display {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        color: var(--primary-color);
+    }
+    
+    .payment-modal .currency {
+        font-size: 1.5rem;
+        vertical-align: top;
+    }
+    
+    .payment-modal .amount {
+        font-weight: bold;
+    }
+    
+    .payment-modal .period {
+        font-size: 1rem;
+        color: #666;
+    }
+    
+    .payment-modal .pro-features-list {
+        margin-bottom: 2rem;
+    }
+    
+    .payment-modal .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .payment-modal .feature-item:last-child {
+        border-bottom: none;
+    }
+    
+    .payment-modal .payment-form {
+        margin: 1.5rem 0;
+    }
+    
+    .payment-modal .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .payment-modal .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: var(--text-dark);
+    }
+    
+    .payment-modal .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid var(--primary-color);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .payment-modal .form-group input:focus {
+        outline: none;
+        border-color: #20c997;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+    }
+    
+    .payment-modal .pay-btn {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 100%;
+        transition: transform 0.2s;
+    }
+    
+    .payment-modal .pay-btn:hover {
+        transform: translateY(-1px);
+    }
+    
+    .payment-modal .payment-info {
+        text-align: center;
+        margin-top: 1rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
     @media (max-width: 768px) {
         .dashboard-container {
             padding: 1rem;
@@ -301,6 +558,12 @@ dashboardStyles.textContent = `
         
         .user-info span {
             display: none;
+        }
+        
+        .payment-modal-content {
+            margin: 2% auto;
+            padding: 1.5rem;
+            width: 95%;
         }
     }
 `;
