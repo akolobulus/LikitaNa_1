@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikitaNa - Login</title>
+    <link rel="stylesheet" href="./CSS/Styles.css">
+    <link rel="stylesheet" href="./CSS/login.css">
+</head>
+<body>
+    <header class="header">
+        <img src="./images/log.png" alt="LikitaNa Logo" />
+        <h1>LikitaNa</h1>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <img src="./images/logo.png" alt="LikitaNa Logo" class="auth-logo" />
+            <h2 id="authTitle">Welcome Back</h2>
+            <p id="authSubtitle">Sign in to your LikitaNa account</p>
+            
+            <div class="auth-toggle">
+                <button class="auth-btn active" onclick="showLogin()">Login</button>
+                <button class="auth-btn" onclick="showSignup()">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+
+            <!-- Demo Accounts Section -->
+            <div class="demo-section">
+                <h3>Demo Accounts</h3>
+                <p>Try LikitaNa with these demo accounts:</p>
+                
+                <div class="demo-accounts">
+                    <div class="demo-account">
+                        <h4>Pro User</h4>
+                        <p><strong>Email:</strong> prouser@gmail.com</p>
+                        <p><strong>Password:</strong> prouser</p>
+                        <button onclick="loginDemo('prouser@gmail.com', 'prouser')" class="demo-btn pro-demo">
+                            Login as Pro User
+                        </button>
+                    </div>
+                    
+                    <div class="demo-account">
+                        <h4>Free User</h4>
+                        <p><strong>Email:</strong> freeuser@gmail.com</p>
+                        <p><strong>Password:</strong> freeuser</p>
+                        <button onclick="loginDemo('freeuser@gmail.com', 'freeuser')" class="demo-btn free-demo">
+                            Login as Free User
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-footer">
+                <a href="Index.html" class="back-link">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./Script/auth.js"></script>
+</body>
+</html>

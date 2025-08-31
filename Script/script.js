@@ -81,7 +81,7 @@ function getLanguageName(code) {
 }
 
 function startChat() {
-    window.location.href = 'chat.html';
+    window.location.href = 'login.html';
 }
 
 function showPlan(planType) {

@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikitaNa Pro - Dashboard</title>
+    <link rel="stylesheet" href="./CSS/Styles.css">
+</head>
+<body>
+    <header class="header">
+        <img src="./images/log.png" alt="LikitaNa Logo" />
+        <h1>LikitaNa <span class="pro-badge">PRO</span></h1>
+        <div class="user-info">
+            <span id="userName">Joe Doe</span>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="welcome-card">
+            <h2>Welcome back, <span id="userDisplayName">Joe</span>! 🎉</h2>
+            <p>You have access to all Pro features including live doctor consultations!</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card pro-feature">
+                <img src="./icons/healthcare.png" alt="Doctor" />
+                <h3>Live Doctor Consultation</h3>
+                <p>Connect with licensed doctors 24/7</p>
+                <button class="feature-btn" onclick="startConsultation()">Start Consultation</button>
+            </div>
+
+            <div class="feature-card">
+                <img src="./icons/chat.png" alt="Chat" />
+                <h3>AI Health Assistant</h3>
+                <p>Get instant health advice</p>
+                <button class="feature-btn" onclick="goToChat()">Start Chat</button>
+            </div>
+
+            <div class="feature-card">
+                <img src="./icons/hospital.png" alt="Centers" />
+                <h3>Find Health Centers</h3>
+                <p>Locate nearby healthcare facilities</p>
+                <button class="feature-btn" onclick="goToCenters()">Find Centers</button>
+            </div>
+
+            <div class="feature-card pro-feature">
+                <img src="./icons/note.png" alt="Records" />
+                <h3>Health Records</h3>
+                <p>Your personal health history</p>
+                <button class="feature-btn" onclick="viewRecords()">View Records</button>
+            </div>
+
+            <div class="feature-card pro-feature">
+                <img src="./icons/medicine.png" alt="Reminders" />
+                <h3>Medicine Reminders</h3>
+                <p>Never miss your medications</p>
+                <button class="feature-btn" onclick="setReminders()">Set Reminders</button>
+            </div>
+
+            <div class="feature-card">
+                <img src="./icons/learning.png" alt="Learn" />
+                <h3>Health Education</h3>
+                <p>Learn and earn rewards</p>
+                <button class="feature-btn" onclick="goToLearn()">Start Learning</button>
+            </div>
+        </div>
+
+        <div class="pro-stats">
+            <div class="stat-card">
+                <h4>Consultations This Month</h4>
+                <span class="stat-number">3</span>
+            </div>
+            <div class="stat-card">
+                <h4>Health Score</h4>
+                <span class="stat-number">85%</span>
+            </div>
+            <div class="stat-card">
+                <h4>Streak Days</h4>
+                <span class="stat-number">12</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <ul>
+            <li class="nav-item">
+                <a href="dashboard-pro.html" class="nav-link active">
+                    <img src="./icons/home.png" alt="Home" />
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="chat.html" class="nav-link">
+                    <img src="./icons/chat.png" alt="Chat" />
+                    <span>Chat</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="center.html" class="nav-link">
+                    <img src="./icons/hospital.png" alt="Centers" />
+                    <span>Centers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="learn.html" class="nav-link">
+                    <img src="./icons/learning.png" alt="Learn" />
+                    <span>Learn</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="profile.html" class="nav-link">
+                    <img src="./icons/information.png" alt="Profile" />
+                    <span>Profile</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <script src="./Script/dashboard.js"></script>
+</body>
+</html>
