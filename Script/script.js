@@ -53,7 +53,7 @@ const translations = {
 };
 
 // Flutterwave configuration
-const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-SANDBOXDEMOKEY-X'; // Replace with your actual Flutterwave public key your actual public key
+const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-68f8b6b6c0ada267982888334ff3725d-X'; // Your actual Flutterwave public key
 
 function setLanguage(lang) {
     currentLanguage = lang;
