@@ -704,48 +704,174 @@ body {
 
 /* BOTTOM NAV */
 .bottom-nav {
-  position: fixed; bottom:0; left:0;
-  width: 100%; height: 60px;
+  position: fixed; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  height: 70px;
   background: var(--light-color);
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-top: 1px solid var(--gray-color);
 }
-.bottom-nav::hover{
-color: var();
-}
+
 .bottom-nav ul {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 100%;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
 .nav-link {
-  display:flex; flex-direction:column; align-items:center;
-  text-decoration:none; color: var(--text-color);
-  font-size: .8rem;
-   transition: all 0.2s ease;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  text-decoration: none; 
+  color: var(--text-color);
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  text-align: center;
 }
+
 .nav-link:hover,
 .nav-link.active {
   color: var(--primary-color);
 }
+
 .nav-link img {
-  width:24px; height:24px; margin-bottom:.2rem;
+  width: 24px; 
+  height: 24px; 
+  margin-bottom: 0.25rem;
+  transition: filter 0.2s ease;
 }
+
 .nav-link:hover img,
 .nav-link.active img {
   filter: invert(40%) sepia(95%) saturate(1200%) hue-rotate(90deg) brightness(90%) contrast(100%);
 }
 
+.nav-link span {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
 /* RESPONSIVE */
-@media (max-width:600px) {
+@media (max-width: 768px) {
+  .header {
+    padding: 0.8rem;
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .header img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .card {
+    width: 95%;
+    padding: 1.5rem;
+    margin: 1rem auto;
+  }
+  
   .health-tips-container,
   .all-badges {
     flex-direction: column;
     align-items: center;
   }
-  .tip-card { width: 80% }
-  .track-container { width: 90%; }
+  
+  .tip-card { 
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+  
+  .track-container { 
+    width: 95%; 
+  }
+  
+  .journey-card {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .nav-link span {
+    font-size: 0.65rem;
+  }
+  
+  .nav-link img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.5rem;
+  }
+  
+  .header h1 {
+    font-size: 1.1rem;
+  }
+  
+  .card {
+    width: 98%;
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .bottom-nav {
+    height: 65px;
+  }
+  
+  .nav-link {
+    padding: 0.3rem;
+  }
+  
+  .nav-link img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .nav-link span {
+    font-size: 0.6rem;
+  }
+  
+  .badges-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 360px) {
+  .badges-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .nav-link span {
+    display: none;
+  }
+  
+  .bottom-nav {
+    height: 55px;
+  }
 }
 
 /* Progress Circle Styles */
