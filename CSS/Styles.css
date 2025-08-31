@@ -319,6 +319,39 @@ body {
   transform: translateY(-1px);
 }
 
+.payment-form {
+  margin: 1.5rem 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-group input:invalid {
+  border-color: #dc3545;
+}
+
 .payment-info {
   text-align: center;
   color: var(--text-muted);
@@ -345,7 +378,179 @@ body {
   margin: 0 auto;
 }
 .about-card h2 { margin-bottom: .5rem; font-size: 1.4rem; }
-.about-card p + p { margin-top: .75rem; color: var(--text-muted); }
+.about-card p + p { margin-top: .75rem; color: var(--text-muted);
+
+/* Gaming Modal Styles */
+.challenge-btn {
+  background: linear-gradient(45deg, var(--primary-color), #20c997);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  transition: transform 0.2s;
+}
+
+.challenge-btn:hover {
+  transform: translateY(-2px);
+}
+
+.gaming-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.gaming-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 1.5rem;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+  animation: modalSlideIn 0.3s ease;
+  overflow: hidden;
+}
+
+.gaming-header {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gaming-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.close-gaming {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.close-gaming:hover {
+  opacity: 1;
+}
+
+.challenge-content {
+  padding: 1.5rem;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.challenge-icon {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.challenge-details {
+  flex: 1;
+}
+
+.challenge-details h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+}
+
+.challenge-details p {
+  margin: 0 0 0.5rem 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.2);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #00d4aa, #00b894);
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.gaming-footer {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rewards-section h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.rewards-list {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.reward-badge {
+  background: rgba(255, 215, 0, 0.9);
+  color: #333;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.claim-btn {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.claim-btn:hover {
+  transform: translateY(-1px);
+} }
 
 /* HEALTH TIPS */
 .health-tips-section {

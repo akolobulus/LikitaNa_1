@@ -111,15 +111,21 @@ function initiatePayment() {
     const currency = 'NGN';
     const txRef = generateTransactionRef();
     
-    // In a real app, you'd get user details from registration
-    const customerEmail = prompt('Please enter your email address:');
-    if (!customerEmail) return;
+    // Get user details from form
+    const customerEmail = document.getElementById('userEmail').value;
+    const customerName = document.getElementById('userName').value;
+    const customerPhone = document.getElementById('userPhone').value;
     
-    const customerName = prompt('Please enter your full name:');
-    if (!customerName) return;
+    // Validate form data
+    if (!customerEmail || !customerName || !customerPhone) {
+        alert('Please fill in all required fields');
+        return;
+    }
     
-    const customerPhone = prompt('Please enter your phone number:');
-    if (!customerPhone) return;
+    if (!customerEmail.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
 
     FlutterwaveCheckout({
         public_key: FLUTTERWAVE_PUBLIC_KEY,

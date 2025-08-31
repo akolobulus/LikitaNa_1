@@ -69,13 +69,14 @@
       .center-card {
         background: var(--card-bg);
         border-radius: var(--radius);
-        padding: var(--spacing);
+        padding: calc(var(--spacing) * 1.5);
         margin-top: var(--spacing);
-        box-shadow: 0 1px 3px var(--shadow);
+        box-shadow: 0 2px 8px var(--shadow);
         position: relative;
-         height: 20vh;
-        align-content: center;
-
+        min-height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         flex: 0 0 auto;
       }
       .center-card .distance {
@@ -238,8 +239,9 @@
 
 .centers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 .center-card {
